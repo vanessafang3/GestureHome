@@ -25,16 +25,6 @@ pygame.mixer.music.set_volume(volume)
 # Functions for controlling music
 
 
-def play_pause():
-    global paused
-    if paused:
-        pygame.mixer.music.unpause()
-        paused = False
-    else:
-        pygame.mixer.music.pause()
-        paused = True
-
-
 def next_track():
     global current_track_index, paused
     current_track_index = (current_track_index + 1) % len(music_files)
@@ -57,21 +47,9 @@ def load_and_play():
     paused = False
 
 
-def increase_volume():
-    global volume
-    volume = min(1.0, volume + 0.1)
-    pygame.mixer.music.set_volume(volume)
-
-
-def decrease_volume():
-    global volume
-    volume = max(0.0, volume - 0.1)
-    pygame.mixer.music.set_volume(volume)
-
-
 running = True
 load_and_play()
-play_pause()
+pygame.mixer.music.pause()
 last_num = -1
 while running:
     with open('audio.txt', 'r') as file:
