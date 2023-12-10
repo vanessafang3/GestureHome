@@ -133,9 +133,10 @@ section ul.a {
 table td {
   vertical-align: text-top;
   padding-right: 30px;
+  text-align: center;
 }
 
-.gpio{
+table{
   margin: auto;
 }
 
