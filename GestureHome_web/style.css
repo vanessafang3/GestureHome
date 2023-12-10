@@ -20,14 +20,17 @@ section h4 {
   font-size: large;
 }
 
-
 header,
-section,
 hr {
   margin-left: 200px;
   padding: 1px 16px;
-  /* margin: 20px auto; */
+}
+
+section {
+  margin-left: 200px;
+  padding: 1px 16px;
   width: 70%;
+
 }
 
 nav ul {
