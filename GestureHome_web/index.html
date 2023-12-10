@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <title>GestureHome</title>
+</head>
+
+
+<body>
+  <nav>
+    <button class="dropdown-btn">Menu</button>
+    <ul class="dropdown-content">
+      <h1> GestureHome</h1>
+      <li><a href="#objective">Objective</a></li>
+      <li><a href="#introduction">Introduction</a></li>
+      <li><a href="#design">Design & Testing</a></li>
+      <li><a href="#results">Results</a></li>
+      <li><a href="#conclusion">Conclusion</a></li>
+      <li><a href="#future">Future Work</a></li>
+      <li><a href="#budget">Budget</a></li>
+      <li><a href="#ref">References</a></li>
+      <li><a href="#code">Code Appendix</a></li>
+      <li><a href="#contributions">Contributions</a></li>
+    </ul>
+  </nav>
+
+  <header>
+    <h1>GestureHome</h1>
+    <h3>Vanessa Fang (vf72) and Xiaoyu Liang (xl434)</h3>
+    <h4>December 10, 2023</h4>
+  </header>
+  <hr>
+  <section id="objective">
+    <h2>Objective</h2>
+    <p>This is the objective section.</p>
+  </section>
+
+  <section id="introduction">
+    <h2>Introduction</h2>
+    <p>This is the introduction section.</p>
+  </section>
+
+  <section id="design">
+    <h2>Design & Testing</h2>
+
+    <h3>High-Level Design</h3>
+    <p>insert picture</p>
+
+    <h3>Setting Up The Environment</h3>
+    <h4>Camera</h4>
+    <p>We began our developmental process by setting up the camera. We accessed the Raspberry Pi configurations by using
+      the 'sudo raspi-config' command, which allowed us to enable the use of the camera interface. After that, we
+      connected the camera module by inserting the camera ribbon cable into the Raspberry Pi's camera port. Finally, we
+      created a simple test camera code in Python to check if everything was working smoothly.
+    </p>
+  </section>
+
+  <section id="results">
+    <h2>Results</h2>
+    <p>We've successfully developed and tested our code, and everything is working as planned. Our home systems, which
+      include the LEDs, speaker, and fan, can be controlled by navigating through the menu and its pages with our hands.
+      Our hand detection feature is accurate and can work with any background. We've successfully developed a system
+      that allows all the home systems to operate simultaneously, just like in a real home. Lastly, the menu updates
+      seamlessly and controls the home system without errors. Overall, we've met the goals outlined in the description.
+    </p>
+  </section>
+
+  <section id="conclusion">
+    <h2>Conclusion</h2>
+    <p>This is the conclusion section.</p>
+  </section>
+
+  <section id="future">
+    <h2>Future Work</h2>
+    <p>If we had more time to work on the project, we could have delved into additional home automation methods, such as
+      opening doors and adjusting the home's temperature. We might've also looked into connecting the Raspberry Pi to
+      Bluetooth, intending to control any Bluetooth-enabled lights or speakers in the home. Lastly, we would have
+      preferred to avoid using the monitor and instead use Adafruit's piTFT.</p>
+  </section>
+
+  <section id="budget">
+    <h2>Budget</h2>
+    <p>This is the budget section.</p>
+  </section>
+
+  <section id="ref">
+    <h2>References</h2>
+    <p>This is the references section.</p>
+  </section>
+
+  <section id="code">
+    <h2>Code Appendix</h2>
+    <p>Code can be accessed on GitHub</p>
+  </section>
+
+  <section id="contributions">
+    <h2>Contributions</h2>
+    <p>This is the contributions section.</p>
+  </section>
+
+
+  <script>
+    // JavaScript to toggle the dropdown content
+    document.querySelector('.dropdown-btn').addEventListener('click', function () {
+      document.querySelector('.dropdown-content').classList.toggle('show');
+    });
+  </script>
+
+</body>
+
+</html>
