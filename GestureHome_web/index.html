@@ -45,6 +45,9 @@
     <h4>December 10, 2023</h4>
   </header>
   <hr>
+
+  <img src="src\team_pic.jpg" class="center-pic" width="60%">
+
   <section id="objective">
     <h2>Objective</h2>
     <p>In our final project, we developed a home automation system controlled by hand gesture using Raspberry Pi.
@@ -71,7 +74,7 @@
 
     <h3 id="design1">High-Level Design</h3>
     <img src="src\diagram.png" class="center-pic" width="70%">
-    <h6>Figure ??: High-Level Design</h6>
+    <h6>Figure 1: High-Level Design</h6>
 
     <h3 id="design2">Setting Up The Environment</h3>
     <h4>1. Camera</h4>
@@ -81,7 +84,7 @@
       created a simple test camera code in Python to check if everything was working smoothly.
     </p>
     <img src="src\image1.jpg" class="center-pic" width="50%">
-    <h6>Figure ??: Our first picture captured on the Raspberry Pi!</h6>
+    <h6>Figure 2: Our first picture captured on the Raspberry Pi!</h6>
 
     <h4>2. Choosing OpenCV & Mediapipe</h3>
       <p>After confirming that the camera works, we then moved on to setting up the Raspberry Pi 4 to create an
@@ -108,7 +111,7 @@
           </td>
         </tr>
       </table>
-      <h6>Figure ??: Using CV2 (left) vs MediaPipe (right) for the hand tracking.</h6>
+      <h6>Figure 3: Using CV2 (left) vs MediaPipe (right) for the hand tracking.</h6>
       <p>We installed MediaPipe on the Raspberry Pi using the command ‘sudo python3 -m pip install mediapipe’. We
         tried
         using the MediaPipe packages; however, we encountered many errors, including missing paths and
@@ -146,7 +149,7 @@
         the
         system itself was performing as expected. </p>
       <img src="src\diagram2.png" class="center-pic" width="80%">
-      <h6>Figure ??: Hardware Connections</h6>
+      <h6>Figure 4: Hardware Connections</h6>
 
       <h4>1. LEDs</h4>
       <p>We used four LEDs in our Raspberry Pi model to represent the lights in our home, and the GPIO connections
@@ -267,7 +270,7 @@
         send
         the command 'sudo shutdown -h now' to the terminal. </p>
       <img src="src\image11.jpg" class="center-pic" width="60%">
-      <h6>Figure ??: Final Hardware Connections</h6>
+      <h6>Figure 5: Final Hardware Connections</h6>
 
       <h3 id="design4">Creating The Menu</h3>
       <h4>1. Initial Designs</h4>
@@ -290,7 +293,9 @@
         was ample space for hand movements and that it was not possible to misclick anything accidentally. We
         meticulously
         planned and drafted the pages to ensure that the end product was simple, intuitive, and user-friendly.</p>
-      <h5>include the initial design pictures</h5>
+      <img src="src\menu_draft.png" class="center-pic" width="70%">
+      <h6>Figure 6: Initial Menu Designs</h6>
+
       <h4>2. Final Designs</h4>
       <p>Initially, we used OpenCV's CV2 module to implement all of our designs. This was incredibly helpful for
         drawing
@@ -303,7 +308,8 @@
         using crontab, we decided to convert our CV2 drawings to Pygame. In the end, we successfully used both CV2
         and
         Pygame to display our final design upon reboot with crontab.</p>
-      <h5>include screenshots of final design</h5>
+      <iframe width="420" height="315" src="https://youtube.com/embed/et91Gea6CPk?autoplay=1&loop=1">
+      </iframe>
 
       <h3 id="design5">Creating The Hand Gestures</h3>
       <h4>1. Index Finger Tracking</h4>
@@ -318,7 +324,7 @@
         in
         point 8 and 4, which corresponds to index and thumb fingertips.</p>
       <img src="src\image3.png" class="center-pic" width="70%">
-      <h6>Figure ??: Hand Landmark Coordinates</h6>
+      <h6>Figure 7: Hand Landmark Coordinates</h6>
       <p>We started by testing the coordinate return of the index finger tip. Mediapipe returns landmarks in
         normalized
         coordinates, where the x and y values range from 0.00 to 1.0, representing the relative position within
@@ -436,7 +442,7 @@
             </td>
           </tr>
         </table>
-        <h6>Figure ??: Reducing the number of hands being detected</h6>
+        <h6>Figure 8: Reducing the number of hands being detected</h6>
 
         <p class="thick">min_detection_confidence</p>
         <p>This threshold represents the confidence level required for successful palm detection in a model. At a low
@@ -447,7 +453,7 @@
           confidence level to 0.8.
         </p>
         <img src="src\image2.png" class="center-pic" width="50%">
-        <h6>Figure ??: Hand Tracking Module False Detecting Background at Low min_detection_confidence</h6>
+        <h6>Figure 9: Hand Tracking Module False Detecting Background at Low min_detection_confidence</h6>
 
         <p class="thick">min_tracking_confidence</p>
         <p>This threshold represents the bounding box IoU threshold between hands in the current frame and the last
