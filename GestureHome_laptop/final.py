@@ -8,9 +8,6 @@ import mediapipe
 import numpy as np
 import pygame
 
-# import RPi.GPIO as GPIO
-# from module import findnameoflandmark, findpostion, speak
-
 # Create a black image as the background
 width, height = 640, 480
 background = np.zeros((height, width, 3), dtype=np.uint8)
@@ -45,47 +42,9 @@ red_light = False
 blue_light = False
 green_light = False
 yellow_light = False
-# red_pin = 4  # gpio4
-# blue_pin = 17  # gpio17
-# green_pin = 27  # gpio27
-# yellow_pin = 22  # gpio22
-# GPIO.cleanup()
-# GPIO.setmode(GPIO.BCM)
-# GPIO.setup(red_pin, GPIO.OUT)
-# GPIO.setup(blue_pin, GPIO.OUT)
-# GPIO.setup(green_pin, GPIO.OUT)
-# GPIO.setup(yellow_pin, GPIO.OUT)
-# red_freq = 100
-# red_duty_cycle = 100
-# red_pwm = GPIO.PWM(red_pin, red_freq)
-# blue_freq = 100
-# blue_duty_cycle = 100
-# blue_pwm = GPIO.PWM(blue_pin, blue_freq)
-# green_freq = 100
-# green_duty_cycle = 100
-# green_pwm = GPIO.PWM(green_pin, green_freq)
-# yellow_freq = 100
-# yellow_duty_cycle = 100
-# yellow_pwm = GPIO.PWM(yellow_pin, yellow_freq)
-# GPIO.output(red_pin, GPIO.LOW)
-# GPIO.output(blue_pin, GPIO.LOW)
-# GPIO.output(yellow_pin, GPIO.LOW)
-# GPIO.output(green_pin, GPIO.LOW)
 
 # Setting Up Motor
-# motor_pwm = 26  # gpio4
-# motor_run = 6
-# motor_freq = 150
-# motor_duty_cycle = 3
 motor_on = False
-# GPIO.setmode(GPIO.BCM)
-# GPIO.setup(motor_pwm, GPIO.OUT)
-# GPIO.setup(motor_run, GPIO.OUT)
-# motor_pwm = GPIO.PWM(motor_pwm, motor_freq)
-# GPIO.output(motor_run, GPIO.LOW)
-
-# Setting Up Shutdown Button
-# GPIO.setup(21, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 
 
 def shutdown():
@@ -150,43 +109,33 @@ def draw_power_page(tabs):
     if (red_light):
         cv2.putText(
             background, "ON", (235, 150), font, 0.5, white, 1, cv2.LINE_AA)
-        # red_pwm.start(100)
-        # print("red light on")
+
     else:
         cv2.putText(
             background, 'OFF', (235, 150), font, 0.5, white, 1, cv2.LINE_AA)
-        # red_pwm.start(0)
-        # print("red light off")
+
     if (blue_light):
         cv2.putText(
             background, "ON", (235, 225), font, 0.5, white, 1, cv2.LINE_AA)
-        # blue_pwm.start(100)
-        # print("blue light on")
+
     else:
         cv2.putText(
             background, 'OFF', (235, 225), font, 0.5, white, 1, cv2.LINE_AA)
-        # blue_pwm.start(0)
-        # print("blue light off")
+
     if (green_light):
         cv2.putText(
             background, "ON", (235, 300), font, 0.5, white, 1, cv2.LINE_AA)
-        # green_pwm.start(100)
-        # print("green light on")
+
     else:
         cv2.putText(
             background, 'OFF', (235, 300), font, 0.5, white, 1, cv2.LINE_AA)
-        # green_pwm.start(0)
-        # print("green light off")
     if (yellow_light):
         cv2.putText(
             background, "ON", (235, 375), font, 0.5, white, 1, cv2.LINE_AA)
-        # yellow_pwm.start(100)
-        # print("yellow light on")
+
     else:
         cv2.putText(
             background, 'OFF', (235, 375), font, 0.5, white, 1, cv2.LINE_AA)
-        # yellow_pwm.start(0)
-        # print("yellow light off")
 
 
 def draw_brightness_page(tabs):
@@ -265,13 +214,10 @@ def draw_fan_page(tabs):
     if (motor_on):
         cv2.putText(
             background, "ON", (35, 110), font, 0.5, white, 1, cv2.LINE_AA)
-        # GPIO.output(motor_run, GPIO.HIGH)
-        # print("motor on")
+
     else:
         cv2.putText(
             background, 'OFF', (35, 110), font, 0.5, white, 1, cv2.LINE_AA)
-        # GPIO.output(motor_run, GPIO.LOW)
-        # print("motor off")
 
 
 # SPEAKER SETTINGS
@@ -379,27 +325,21 @@ def handle_mouse_event(x, y, dist):
             if red_light:
                 start_time = start_time - 2
                 red_duty_cycle = min(dist, 100)
-                # red_pwm.start(red_duty_cycle)
-                # print(dist)
-                # print(red_duty_cycle)
                 print("adjusting red light brightness: ", red_duty_cycle)
         elif 390 < x < 590 and 125 < y < 250:
             if blue_light:
                 start_time = start_time - 2
                 blue_duty_cycle = min(dist, 100)
-                # blue_pwm.start(blue_duty_cycle)
                 print("adjusting blue light brightness: ", blue_duty_cycle)
         elif 85 < x < 285 and 300 < y < 425:
             if green_light:
                 start_time = start_time - 3
                 green_duty_cycle = min(dist, 100)
-                # green_pwm.start(green_duty_cycle)
                 print("adjusting green light brightness: ", green_duty_cycle)
         elif 390 < x < 590 and 300 < y < 425:
             if yellow_light:
                 start_time = start_time - 2
                 yellow_duty_cycle = min(dist, 100)
-                # yellow_pwm.start(yellow_duty_cycle)
                 print("adjusting yellow light brightness: ", yellow_duty_cycle)
     elif current_page == SPEAKER_PAGE:
         if 0 < y < 50:
@@ -521,16 +461,7 @@ def clean():
     global not_quit
     cv2.destroyAllWindows()
     pygame.quit()
-    # red_pwm.stop()
-    # yellow_pwm.stop()
-    # blue_pwm.stop()
-    # green_pwm.stop()
     cap.release()
-    # GPIO.output(red_pin, GPIO.LOW)
-    # GPIO.output(green_pin, GPIO.LOW)
-    # GPIO.output(blue_pin, GPIO.LOW)
-    # GPIO.output(yellow_pin, GPIO.LOW)
-    # GPIO.cleanup()
     not_quit = 0
 
 
