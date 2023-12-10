@@ -264,7 +264,7 @@
         to
         send
         the command 'sudo shutdown -h now' to the terminal. </p>
-      <img src="src\image11.jpg" class="center-pic" width="70%">
+      <img src="src\image11.jpg" class="center-pic" width="60%">
       <h6>Figure ??: Final Hardware Connections</h6>
 
       <h3 id="design4">Creating The Menu</h3>
@@ -415,7 +415,50 @@
         module to
         eliminate the need for a communication pipe. </p>
       <h4>5. Tuning and Performance Testing</h4>
-      <h5>include everything here</h5>
+      <p>To achieve optimal hand-tracking accuracy and performance, we fine-tuned several key parameters in the
+        configuration of the Hand Landmark model. Specifically, we adjusted the following parameters to enhance the
+        overall reliability and efficiency of our system: </p>
+      <ul>
+        <p class="thick">max_num_hands</p>
+        <p>We set the maximum number of hands detected by the model to 1 (previously it was set to 2). By limiting the
+          system to recognize a single hand, we significantly improved computational efficiency and resulted in a
+          notable performance boost of approximately 180%.</p>
+        <table class="side-pics">
+          <tr>
+            <td>
+              <img src="src\image7.png" class="center-pic" width=100%>
+            </td>
+            <td>
+              <img src="src\image4.png" class="center-pic" width=100%>
+            </td>
+          </tr>
+        </table>
+        <h6>Figure ??: Reducing the number of hands being detected</h6>
+
+        <p class="thick">min_detection_confidence</p>
+        <p>This threshold represents the confidence level required for successful palm detection in a model. At a low
+          min_detection_confidence, the system will attempt to detect hands in every frame at a low confidence level
+          associated with the detected hand. This will increase false positives as the system becomes more permissive in
+          accepting detections. If the confidence level is set too high, it can lead to more conservative hand detection
+          and cause the system to miss valid hand instances. To ensure robust hand detection, we set the minimum
+          confidence level to 0.8.
+        </p>
+        <img src="src\image2.png" class="center-pic" width="50%">
+        <h6>Figure ??: Hand Tracking Module False Detecting Background at Low min_detection_confidence</h6>
+
+        <p class="thick">min_tracking_confidence</p>
+        <p>This threshold represents the bounding box IoU threshold between hands in the current frame and the last
+          frame. If the confidence is set too low, other objects other than the hand could be accepted as a valid
+          tracking result. This can lead to increased sensitivity to noise and may result in the system tracking false
+          positives or inaccurately tracking hand positions. To maintain accurate hand tracking, we tuned the minimum
+          confidence score for tracking to 0.8.</p>
+        <h5>insert video</h5>
+        <p class="thick">Choosing Frame Size</p>
+        <p>The choice of the frame size of 640*480 pixels provides a balance between speed and accurate identification
+          in the hand-tracking process. A smaller frame size generally leads to faster processing times due to fewer
+          computational resources, which contributes to a higher frame rate and more efficient hand-tracking operation.
+          However, a too-small frame size may not provide sufficient details for accurate hand tracking. </p>
+      </ul>
 
       <h3 id="design6">Integrating Menu, Hand Tracking, and Devices</h3>
       <p>After successfully creating functioning home systems, menus, and hand gestures that ran individually, the
