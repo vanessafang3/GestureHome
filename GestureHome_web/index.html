@@ -12,10 +12,9 @@
 <body>
   <nav>
     <ul>
-      <h1> GestureHome</h1>
+      <li> <b>GestureHome</b></li>
       <li><a href="#objective">Objective</a></li>
       <li><a href="#introduction">Introduction</a></li>
-
       <li class="dropdown">
         <a href="#design">Design & Testing</a>
         <ul class="dropdown-content-sub">
@@ -28,7 +27,6 @@
           <li><a href="#design7">Reboot</a></li>
         </ul>
       </li>
-
       <li class="after-drop"><a href="#results">Results</a></li>
       <li><a href="#conclusion">Conclusion</a></li>
       <li><a href="#future">Future Work</a></li>
@@ -46,7 +44,7 @@
   </header>
   <hr>
 
-  <img src="src\team_pic.jpg" class="center-pic" width="60%">
+  <img src="img/team_pic.jpg" class="center-pic-60" alt="Team Picture">
 
   <section id="objective">
     <h2>Objective</h2>
@@ -54,7 +52,7 @@
       Inspired by recent advancements in computer vision, our goal was to bring convenience to individuals, particularly
       those with limited mobility such as leg disabilities. Users can easily control LED lights, a fan, and a speaker by
       interacting with the user interface displayed on the monitor through hand gestures.</p>
-    <iframe width="420" height="315" src="https://youtube.com/embed/iSAVdvJM_XQ?autoplay=1&loop=1">
+    <iframe src="https://youtube.com/embed/iSAVdvJM_XQ?autoplay=1&loop=1">
     </iframe>
   </section>
 
@@ -73,7 +71,7 @@
     <h2>Design & Testing</h2>
 
     <h3 id="design1">High-Level Design</h3>
-    <img src="src\diagram.png" class="center-pic" width="70%">
+    <img src="img/diagram.png" class="center-pic-70" alt="High-Level Design">
     <h6>Figure 1: High-Level Design</h6>
 
     <h3 id="design2">Setting Up The Environment</h3>
@@ -83,449 +81,449 @@
       connected the camera module by inserting the camera ribbon cable into the Raspberry Pi's camera port. Finally, we
       created a simple test camera code in Python to check if everything was working smoothly.
     </p>
-    <img src="src\image1.jpg" class="center-pic" width="50%">
+    <img src="img/image1.jpg" class="center-pic-50" alt="RPi Picture">
     <h6>Figure 2: Our first picture captured on the Raspberry Pi!</h6>
 
-    <h4>2. Choosing OpenCV & Mediapipe</h3>
-      <p>After confirming that the camera works, we then moved on to setting up the Raspberry Pi 4 to create an
-        environment that could enable us to create hand gestures. To implement the hand gestures, we decided to use the
-        OpenCV library. Initially, we tried installing it using the command 'pip install opencv-python'. However, we
-        later learned that the installation process was too long - around 3 hours. Therefore, we used a different
-        command to install the pre-compiled version of OpenCV - 'sudo apt-get install python3-opencv'.
-      </p>
-      <p>
-        We conducted tests to check the hand detection using only the OpenCV library. However, we were not satisfied
-        with the results we obtained as it was unstable and unreliable. Sometimes, it would detect a hand that didn't
-        exist in the background or not accurately identify the index finger and return a broad outline of our hands.
-        This led us to do further research on how we could improve hand detection accuracy. We eventually found and
-        tested the MediaPipe framework on our laptops, which provided us with stable, reliable, smooth, and
-        high-accuracy hand detection. Thus, we decided to proceed with implementing both the OpenCV and MediaPipe
-        frameworks on the Raspberry Pi.</p>
-      <table width=60%>
+    <h4>2. Choosing OpenCV & Mediapipe</h4>
+    <p>After confirming that the camera works, we then moved on to setting up the Raspberry Pi 4 to create an
+      environment that could enable us to create hand gestures. To implement the hand gestures, we decided to use the
+      OpenCV library. Initially, we tried installing it using the command 'pip install opencv-python'. However, we
+      later learned that the installation process was too long - around 3 hours. Therefore, we used a different
+      command to install the pre-compiled version of OpenCV - 'sudo apt-get install python3-opencv'.
+    </p>
+    <p>
+      We conducted tests to check the hand detection using only the OpenCV library. However, we were not satisfied
+      with the results we obtained as it was unstable and unreliable. Sometimes, it would detect a hand that didn't
+      exist in the background or not accurately identify the index finger and return a broad outline of our hands.
+      This led us to do further research on how we could improve hand detection accuracy. We eventually found and
+      tested the MediaPipe framework on our laptops, which provided us with stable, reliable, smooth, and
+      high-accuracy hand detection. Thus, we decided to proceed with implementing both the OpenCV and MediaPipe
+      frameworks on the Raspberry Pi.</p>
+    <table class="table1">
+      <tr>
+        <td>
+          <img src="img/image9.png" class="center-pic-100" alt="CV2 Model">
+        </td>
+        <td>
+          <img src="img/image8.png" class="center-pic-100" alt="MediaPipe Model">
+        </td>
+      </tr>
+    </table>
+    <h6>Figure 3: Using CV2 (left) vs MediaPipe (right) for the hand tracking.</h6>
+    <p>We installed MediaPipe on the Raspberry Pi using the command ‘sudo python3 -m pip install mediapipe’. We
+      tried
+      using the MediaPipe packages; however, we encountered many errors, including missing paths and
+      unidentifiable
+      files. We attempted to reinstall the framework in hopes that it was simply an installation error, but this
+      did
+      not solve the problems. After spending two weeks trying to figure out why MediaPipe does not work, the
+      Professor
+      informed us that another group (jl4254) also using MediaPipe recently found out that we needed to
+      downgrade
+      our
+      Raspberry Pi from Debian Bullseye to Debian Buster.
+    </p>
+    <p>To downgrade to
+      <a href="https://downloads.raspberrypi.org/raspios_armhf/images/raspios_armhf-2021-05-28/">Debian
+        Buster</a>,
+      we
+      installed the 2021-05-07 version of Debian Buster's image and wrote it onto
+      the SD Card. Once the image was successfully written, we proceeded to set up the configurations and
+      install
+      any
+      missing libraries. After completing the setup, we tested the code that was previously working on our
+      laptops
+      on
+      the Buster version of the Raspberry Pi. We were pleased to observe that MediaPipe was functioning
+      correctly
+      and
+      our code was running smoothly with precise detection of hand gestures.
+    </p>
+
+    <h3 id="design3">Hardware Connections</h3>
+    <p>For our smart home, we chose to connect hand gesture detections to control three home automation systems:
+      lights,
+      a music player, and a fan. We created each system individually without using hand detections to make sure
+      the
+      system itself was performing as expected. </p>
+    <img src="img/diagram2.png" class="center-pic-80" alt="Hardware diagram">
+    <h6>Figure 4: Hardware Connections</h6>
+
+    <h4>1. LEDs</h4>
+    <p>We used four LEDs in our Raspberry Pi model to represent the lights in our home, and the GPIO connections
+      are:
+    </p>
+
+    <table class="gpio">
+      <tr>
+        <td>
+          <h4>LED Color</h4>
+        </td>
+        <td>
+          <h4>GPIO</h4>
+        </td>
+        <td>
+          <h4>Pin</h4>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <p>Red</p>
+        </td>
+        <td>
+          <p>4</p>
+        </td>
+        <td>
+          <p>7</p>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <p>Green</p>
+        </td>
+        <td>
+          <p>27</p>
+        </td>
+        <td>
+          <p>13</p>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <p>Blue</p>
+        </td>
+        <td>
+          <p>17</p>
+        </td>
+        <td>
+          <p>11</p>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <p>Yellow</p>
+        </td>
+        <td>
+          <p>22</p>
+        </td>
+        <td>
+          <p>15</p>
+        </td>
+      </tr>
+    </table>
+
+    <p>The features of the four LEDs include powering on, powering off, and adjusting brightness. In order to
+      enable
+      the
+      full range of features for the four LEDs, we have assigned each LED a unique frequency value, duty cycle
+      value,
+      and GPIO.pwm instantiation. To turn on an LED, we start the PWM with a duty cycle of 100. Conversely, to
+      turn
+      off
+      an LED, we start the PWM with a duty cycle of 0. To adjust the brightness, we have implemented a temporary
+      code
+      that controls the duty cycle of each LED, allowing us to increase or decrease the brightness as needed.
+      This
+      ensures that our LEDs are fully capable of adjusting brightness as required.</p>
+
+    <h4>2. Fan</h4>
+    <p>We chose to use a DC motor fan to represent the air system in our smart home. The user is able to turn on
+      and
+      off
+      the Fan and adjust its speed. To precisely control the speed of the motor, it requires a motor controller
+      to
+      adjust the amount of voltage applied using the PWM signal from GPIO 6. We conducted experiments to
+      optimize
+      the
+      control parameters for the fan. A higher duty cycle would increase the average voltage applied to the
+      motor,
+      resulting in a higher speed. We found out that when the duty cycle is set above 15%, the fan operates at a
+      speed
+      that might be considered too fast for typical home use. Therefore, to ensure a safe and comfortable
+      operation,
+      we
+      set the PWM signal to a constant frequency of 150 Hz while restricting the duty cycle within the range of
+      0%
+      and
+      100%.</p>
+
+    <h4>3. Speaker</h4>
+    <p>The music player has five features, including play, pause, skip, previous track, and volume control. To
+      use
+      the
+      player, we downloaded six songs externally and stored them in a designated folder. We implemented all of
+      the
+      features using the pygame.mixer.music module. During testing, we mapped the features to specific keys for
+      ease
+      of
+      use, such as using the spacebar for play/pause, up and down arrows for volume control, and left and right
+      arrows
+      for skipping tracks. To further enhance the player's functionality, we also programmed it to automatically
+      play
+      the next song when the current one finishes, and play the first song when the last one finishes.</p>
+
+    <h4>4. Shutdown Button</h4>
+    <p>We integrated an external shutdown button using GPIO 21. When it is pressed, we use the subprocess module
+      to
+      send
+      the command 'sudo shutdown -h now' to the terminal. </p>
+    <img src="img/image11.jpg" class="center-pic-60" alt="Hardware Connections">
+    <h6>Figure 5: Final Hardware Connections</h6>
+
+    <h3 id="design4">Creating The Menu</h3>
+    <h4>1. Initial Designs</h4>
+    <p>Our main goal was to create a user-friendly interface that is easy to navigate. To achieve this, we
+      implemented
+      a
+      navigation bar located at the top of the menu. The navigation bar changes depending on the page you are
+      on,
+      making
+      it easier for users to access the features they need. We designed a total of seven pages, including the
+      main
+      page,
+      tutorial, controlling the LED power, setting LED brightness, speaker control, song list, and controlling
+      the
+      fan.
+    </p>
+    <p>In addition to ease of use, we also considered hand gestures while designing the interface. We ensured
+      that
+      there
+      was ample space for hand movements and that it was not possible to misclick anything accidentally. We
+      meticulously
+      planned and drafted the pages to ensure that the end product was simple, intuitive, and user-friendly.</p>
+    <img src="img/menu_draft.png" class="center-pic-70" alt="Menu Draft">
+    <h6>Figure 6: Initial Menu Designs</h6>
+
+    <h4>2. Final Designs</h4>
+    <p>Initially, we used OpenCV's CV2 module to implement all of our designs. This was incredibly helpful for
+      drawing
+      shapes, writing text, and displaying the menu as a whole. However, while setting up crontab, we discovered
+      that
+      CV2 was not able to draw on the monitor. Remembering that we were able to display drawings with Pygame
+      from
+      Lab
+      3
+      using crontab, we decided to convert our CV2 drawings to Pygame. In the end, we successfully used both CV2
+      and
+      Pygame to display our final design upon reboot with crontab.</p>
+    <iframe src="https://youtube.com/embed/et91Gea6CPk?autoplay=1&loop=1">
+    </iframe>
+
+    <h3 id="design5">Creating The Hand Gestures</h3>
+    <h4>1. Index Finger Tracking</h4>
+    <p>To track the position and gesture of the hand, we used external libraries including CV2 and MediaPipe to
+      detect
+      the landmarks of the hands in an image. The hand landmark model in MediaPipe can pass the image data to a
+      machine
+      learning model and outputs the key points of hands in image coordinates as well as the handedness (right /
+      left).
+      It can detect 21 hand-knuckle coordinates listed in the figure below. In our project, we were more
+      interested
+      in
+      point 8 and 4, which corresponds to index and thumb fingertips.</p>
+    <img src="img/image3.png" class="center-pic-70" alt="Hand landmark">
+    <h6>Figure 7: Hand Landmark Coordinates</h6>
+    <p>We started by testing the coordinate return of the index finger tip. Mediapipe returns landmarks in
+      normalized
+      coordinates, where the x and y values range from 0.00 to 1.0, representing the relative position within
+      the
+      frame.
+      A normalized coordinate of (0.5, 0.5), for instance, corresponds to the center of the frame. To convert
+      normalized
+      coordinates into pixel coordinates suitable for visualization on the screen,
+      ‘drawingModule._normalized_to_pixel_coordinates’ is employed. It takes the normalized x and y coordinates,
+      along
+      with the dimensions of the frame, and translates them into pixel coordinates within the specified frame
+      size.
+      We
+      verified the correctness of pixel coordinates by printing out the data on the terminal and visually
+      inspect
+      the
+      coordinates aligned with the expected values. </p>
+    <h4>2. Clicking</h4>
+    <p>Initially, our system was designed using hand gestures to signify a click action on the menu. If only the
+      index
+      finger is raised, the system exclusively tracks the coordinates of the index finger tip. This allows users
+      to
+      navigate or hover over menu options without triggering an action. If both the index and middle fingers are
+      raised,
+      we interpret this gesture as a click action. In this scenario, we trigger an event at the coordinates
+      corresponding to the tip of the index finger. This design decision is made to provide users with an
+      intuitive
+      way
+      to interact with the home control system. </p>
+    <p>In our code, we compared the y-coordinates of each finger tip with the y-coordinates of the corresponding
+      joint.
+      If the finger tip is higher than the joint, it is considered “up.” The click will be triggered if both
+      index
+      and
+      middle fingers are detected as “up.”</p>
+    <iframe src="https://www.youtube.com/embed/T9ViH9CkWaQ?autoplay=1&loop=1">
+    </iframe>
+    <p>We conducted thorough testing of the click action feature on our own local laptop, and the functionality
+      performed smoothly and without issues. However, when we extended our testing to the Raspberry Pi, we
+      encountered
+      a
+      noticeable delay in the execution of the click action. This delay was primarily attributed to the
+      constrained
+      computational efficiency of the Raspberry Pi compared to our local laptop. To optimize hand-tracking
+      efficiency
+      for a better user experience, we decided to remove the two-finger detection algorithm from the system. We
+      modified
+      our system to automatically trigger a click action every 2 seconds. This timed approach improved delay by
+      23%
+      percent. On the other hand, by adopting this timer-based click mechanism, we simplify the user control
+      experience.
+      In the previous two-finger-up design, the position of the index finger can unintentionally shift when the
+      middle
+      finger is raised to trigger the click. This is because our hand mechanism involves interdependent
+      movements of
+      adjacent fingers. It’s difficult for users to consistently and accurately trigger the correct button for
+      two-finger-up detection. Users might experience frustration and the need for multiple attempts to
+      successfully
+      execute the desired gesture. Therefore, using one finger for a timed click simplifies the user experience
+      and
+      makes it easier and more accessible for individuals to interact with the system.
+    </p>
+    <h4>3. Slider Control</h4>
+    <p>To implement control over speed, volume, and brightness, we used the measurement of the distance between
+      the
+      tips
+      of the index finger and thumb. We tracked the coordinates of both the thumb and index fingertip through
+      mediapipe
+      hand module. The distance between the tips of two fingers is continuously measured in real-time. This is
+      achieved
+      by calculating the Euclidean distance between the respective landmark points. The measured distance is
+      then
+      mapped
+      to control parameters such as speed, volume, or brightness. A shorter distance corresponds to a lower
+      speed,
+      volume, or brightness, while a longer distance could indicate an increase in these settings. </p>
+    <h4>4. Pipe Communication</h4>
+    <p>We initially used multiprocessing. Pipe to communicate data between the hand tracking module and the menu
+      module
+      for better management of the system. We defined a structure ‘(1, (x, y))’, where the first element ‘1’
+      indicates
+      a
+      click event (0 if no click), and the second element (x, y) denotes the associated coordinates. The hand
+      tracking
+      shares this formatted data through pipe in every frame, providing the menu module with real-time updates
+      for
+      click
+      events and coordinates.</p>
+    <p>The communication pipeline worked perfectly fine on our own laptop, but during testing on the Raspberry
+      Pi
+      platform, a notable conflict happened between the pipe and the cv2 camera capture. The camera failed to
+      capture
+      the frame when the pipe was active. Interestingly, the issue was resolved when the pipe was removed. This
+      unexpected conflict may be related to concurrency or the interplay between multiprocessing operations and
+      camera
+      capture. As a result, we have made a strategic decision to integrate hand tracking and menu into one
+      module to
+      eliminate the need for a communication pipe. </p>
+    <h4>5. Tuning and Performance Testing</h4>
+    <p>To achieve optimal hand-tracking accuracy and performance, we fine-tuned several key parameters in the
+      configuration of the Hand Landmark model. Specifically, we adjusted the following parameters to enhance the
+      overall reliability and efficiency of our system: </p>
+    <div class="tune">
+      <p class="thick">max_num_hands</p>
+      <p>We set the maximum number of hands detected by the model to 1 (previously it was set to 2). By limiting the
+        system to recognize a single hand, we significantly improved computational efficiency and resulted in a
+        notable performance boost of approximately 180%.</p>
+      <table>
         <tr>
-          <td width="30%">
-            <img src="src\image9.png" class="center-pic" width=100%>
+          <td>
+            <img src="img/image7.png" class="center-pic-100" alt="2 hands detection">
           </td>
-          <td width="30%">
-            <img src="src\image8.png" class="center-pic" width=100%>
+          <td>
+            <img src="img/image4.png" class="center-pic-100" alt="1 hand detection">
           </td>
         </tr>
       </table>
-      <h6>Figure 3: Using CV2 (left) vs MediaPipe (right) for the hand tracking.</h6>
-      <p>We installed MediaPipe on the Raspberry Pi using the command ‘sudo python3 -m pip install mediapipe’. We
-        tried
-        using the MediaPipe packages; however, we encountered many errors, including missing paths and
-        unidentifiable
-        files. We attempted to reinstall the framework in hopes that it was simply an installation error, but this
-        did
-        not solve the problems. After spending two weeks trying to figure out why MediaPipe does not work, the
-        Professor
-        informed us that another group (jl4254) also using MediaPipe recently found out that we needed to
-        downgrade
-        our
-        Raspberry Pi from Debian Bullseye to Debian Buster.
+      <h6>Figure 8: Reducing the number of hands being detected</h6>
+
+      <p class="thick">min_detection_confidence</p>
+      <p>This threshold represents the confidence level required for successful palm detection in a model. At a low
+        min_detection_confidence, the system will attempt to detect hands in every frame at a low confidence level
+        associated with the detected hand. This will increase false positives as the system becomes more permissive in
+        accepting detections. If the confidence level is set too high, it can lead to more conservative hand detection
+        and cause the system to miss valid hand instances. To ensure robust hand detection, we set the minimum
+        confidence level to 0.8.
       </p>
-      <p>To downgrade to
-        <a href="https://downloads.raspberrypi.org/raspios_armhf/images/raspios_armhf-2021-05-28/">Debian
-          Buster</a>,
-        we
-        installed the 2021-05-07 version of Debian Buster's image and wrote it onto
-        the SD Card. Once the image was successfully written, we proceeded to set up the configurations and
-        install
-        any
-        missing libraries. After completing the setup, we tested the code that was previously working on our
-        laptops
-        on
-        the Buster version of the Raspberry Pi. We were pleased to observe that MediaPipe was functioning
-        correctly
-        and
-        our code was running smoothly with precise detection of hand gestures.
-      </p>
+      <img src="img/image2.png" class="center-pic-50" alt="bad hand detection">
+      <h6>Figure 9: Hand Tracking Module False Detecting Background at Low min_detection_confidence</h6>
 
-      <h3 id="design3">Hardware Connections</h3>
-      <p>For our smart home, we chose to connect hand gesture detections to control three home automation systems:
-        lights,
-        a music player, and a fan. We created each system individually without using hand detections to make sure
-        the
-        system itself was performing as expected. </p>
-      <img src="src\diagram2.png" class="center-pic" width="80%">
-      <h6>Figure 4: Hardware Connections</h6>
-
-      <h4>1. LEDs</h4>
-      <p>We used four LEDs in our Raspberry Pi model to represent the lights in our home, and the GPIO connections
-        are:
-      </p>
-
-      <table class="gpio">
-        <tr>
-          <td>
-            <h4>LED Color</h4>
-          </td>
-          <td>
-            <h4>GPIO</h4>
-          </td>
-          <td>
-            <h4>Pin</h4>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <p>Red</p>
-          </td>
-          <td>
-            <p>4</p>
-          </td>
-          <td>
-            <p>7</p>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <p>Green</p>
-          </td>
-          <td>
-            <p>27</p>
-          </td>
-          <td>
-            <p>13</p>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <p>Blue</p>
-          </td>
-          <td>
-            <p>17</p>
-          </td>
-          <td>
-            <p>11</p>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <p>Yellow</p>
-          </td>
-          <td>
-            <p>22</p>
-          </td>
-          <td>
-            <p>15</p>
-          </td>
-        </tr>
-      </table>
-
-      <p>The features of the four LEDs include powering on, powering off, and adjusting brightness. In order to
-        enable
-        the
-        full range of features for the four LEDs, we have assigned each LED a unique frequency value, duty cycle
-        value,
-        and GPIO.pwm instantiation. To turn on an LED, we start the PWM with a duty cycle of 100. Conversely, to
-        turn
-        off
-        an LED, we start the PWM with a duty cycle of 0. To adjust the brightness, we have implemented a temporary
-        code
-        that controls the duty cycle of each LED, allowing us to increase or decrease the brightness as needed.
-        This
-        ensures that our LEDs are fully capable of adjusting brightness as required.</p>
-
-      <h4>2. Fan</h4>
-      <p>We chose to use a DC motor fan to represent the air system in our smart home. The user is able to turn on
-        and
-        off
-        the Fan and adjust its speed. To precisely control the speed of the motor, it requires a motor controller
-        to
-        adjust the amount of voltage applied using the PWM signal from GPIO 6. We conducted experiments to
-        optimize
-        the
-        control parameters for the fan. A higher duty cycle would increase the average voltage applied to the
-        motor,
-        resulting in a higher speed. We found out that when the duty cycle is set above 15%, the fan operates at a
-        speed
-        that might be considered too fast for typical home use. Therefore, to ensure a safe and comfortable
-        operation,
-        we
-        set the PWM signal to a constant frequency of 150 Hz while restricting the duty cycle within the range of
-        0%
-        and
-        100%.</p>
-
-      <h4>3. Speaker</h4>
-      <p>The music player has five features, including play, pause, skip, previous track, and volume control. To
-        use
-        the
-        player, we downloaded six songs externally and stored them in a designated folder. We implemented all of
-        the
-        features using the pygame.mixer.music module. During testing, we mapped the features to specific keys for
-        ease
-        of
-        use, such as using the spacebar for play/pause, up and down arrows for volume control, and left and right
-        arrows
-        for skipping tracks. To further enhance the player's functionality, we also programmed it to automatically
-        play
-        the next song when the current one finishes, and play the first song when the last one finishes.</p>
-
-      <h4>4. Shutdown Button</h4>
-      <p>We integrated an external shutdown button using GPIO 21. When it is pressed, we use the subprocess module
-        to
-        send
-        the command 'sudo shutdown -h now' to the terminal. </p>
-      <img src="src\image11.jpg" class="center-pic" width="60%">
-      <h6>Figure 5: Final Hardware Connections</h6>
-
-      <h3 id="design4">Creating The Menu</h3>
-      <h4>1. Initial Designs</h4>
-      <p>Our main goal was to create a user-friendly interface that is easy to navigate. To achieve this, we
-        implemented
-        a
-        navigation bar located at the top of the menu. The navigation bar changes depending on the page you are
-        on,
-        making
-        it easier for users to access the features they need. We designed a total of seven pages, including the
-        main
-        page,
-        tutorial, controlling the LED power, setting LED brightness, speaker control, song list, and controlling
-        the
-        fan.
-      </p>
-      <p>In addition to ease of use, we also considered hand gestures while designing the interface. We ensured
-        that
-        there
-        was ample space for hand movements and that it was not possible to misclick anything accidentally. We
-        meticulously
-        planned and drafted the pages to ensure that the end product was simple, intuitive, and user-friendly.</p>
-      <img src="src\menu_draft.png" class="center-pic" width="70%">
-      <h6>Figure 6: Initial Menu Designs</h6>
-
-      <h4>2. Final Designs</h4>
-      <p>Initially, we used OpenCV's CV2 module to implement all of our designs. This was incredibly helpful for
-        drawing
-        shapes, writing text, and displaying the menu as a whole. However, while setting up crontab, we discovered
-        that
-        CV2 was not able to draw on the monitor. Remembering that we were able to display drawings with Pygame
-        from
-        Lab
-        3
-        using crontab, we decided to convert our CV2 drawings to Pygame. In the end, we successfully used both CV2
-        and
-        Pygame to display our final design upon reboot with crontab.</p>
-      <iframe width="420" height="315" src="https://youtube.com/embed/et91Gea6CPk?autoplay=1&loop=1">
+      <p class="thick">min_tracking_confidence</p>
+      <p>This threshold represents the bounding box IoU threshold between hands in the current frame and the last
+        frame. If the confidence is set too low, other objects other than the hand could be accepted as a valid
+        tracking result. This can lead to increased sensitivity to noise and may result in the system tracking false
+        positives or inaccurately tracking hand positions. To maintain accurate hand tracking, we tuned the minimum
+        confidence score for tracking to 0.8.</p>
+      <iframe src="https://youtube.com/embed/X6E5mHIKcdU?autoplay=1&loop=1">
       </iframe>
 
-      <h3 id="design5">Creating The Hand Gestures</h3>
-      <h4>1. Index Finger Tracking</h4>
-      <p>To track the position and gesture of the hand, we used external libraries including CV2 and MediaPipe to
-        detect
-        the landmarks of the hands in an image. The hand landmark model in MediaPipe can pass the image data to a
-        machine
-        learning model and outputs the key points of hands in image coordinates as well as the handedness (right /
-        left).
-        It can detect 21 hand-knuckle coordinates listed in the figure below. In our project, we were more
-        interested
-        in
-        point 8 and 4, which corresponds to index and thumb fingertips.</p>
-      <img src="src\image3.png" class="center-pic" width="70%">
-      <h6>Figure 7: Hand Landmark Coordinates</h6>
-      <p>We started by testing the coordinate return of the index finger tip. Mediapipe returns landmarks in
-        normalized
-        coordinates, where the x and y values range from 0.00 to 1.0, representing the relative position within
-        the
-        frame.
-        A normalized coordinate of (0.5, 0.5), for instance, corresponds to the center of the frame. To convert
-        normalized
-        coordinates into pixel coordinates suitable for visualization on the screen,
-        ‘drawingModule._normalized_to_pixel_coordinates’ is employed. It takes the normalized x and y coordinates,
-        along
-        with the dimensions of the frame, and translates them into pixel coordinates within the specified frame
-        size.
-        We
-        verified the correctness of pixel coordinates by printing out the data on the terminal and visually
-        inspect
-        the
-        coordinates aligned with the expected values. </p>
-      <h4>2. Clicking</h4>
-      <p>Initially, our system was designed using hand gestures to signify a click action on the menu. If only the
-        index
-        finger is raised, the system exclusively tracks the coordinates of the index finger tip. This allows users
-        to
-        navigate or hover over menu options without triggering an action. If both the index and middle fingers are
-        raised,
-        we interpret this gesture as a click action. In this scenario, we trigger an event at the coordinates
-        corresponding to the tip of the index finger. This design decision is made to provide users with an
-        intuitive
-        way
-        to interact with the home control system. </p>
-      <p>In our code, we compared the y-coordinates of each finger tip with the y-coordinates of the corresponding
-        joint.
-        If the finger tip is higher than the joint, it is considered “up.” The click will be triggered if both
-        index
-        and
-        middle fingers are detected as “up.”</p>
-      <iframe width="420" height="315" src="https://www.youtube.com/embed/T9ViH9CkWaQ?autoplay=1&loop=1">
-      </iframe>
-      <p>We conducted thorough testing of the click action feature on our own local laptop, and the functionality
-        performed smoothly and without issues. However, when we extended our testing to the Raspberry Pi, we
-        encountered
-        a
-        noticeable delay in the execution of the click action. This delay was primarily attributed to the
-        constrained
-        computational efficiency of the Raspberry Pi compared to our local laptop. To optimize hand-tracking
-        efficiency
-        for a better user experience, we decided to remove the two-finger detection algorithm from the system. We
-        modified
-        our system to automatically trigger a click action every 2 seconds. This timed approach improved delay by
-        23%
-        percent. On the other hand, by adopting this timer-based click mechanism, we simplify the user control
-        experience.
-        In the previous two-finger-up design, the position of the index finger can unintentionally shift when the
-        middle
-        finger is raised to trigger the click. This is because our hand mechanism involves interdependent
-        movements of
-        adjacent fingers. It’s difficult for users to consistently and accurately trigger the correct button for
-        two-finger-up detection. Users might experience frustration and the need for multiple attempts to
-        successfully
-        execute the desired gesture. Therefore, using one finger for a timed click simplifies the user experience
-        and
-        makes it easier and more accessible for individuals to interact with the system.
-      </p>
-      <h4>3. Slider Control</h4>
-      <p>To implement control over speed, volume, and brightness, we used the measurement of the distance between
-        the
-        tips
-        of the index finger and thumb. We tracked the coordinates of both the thumb and index fingertip through
-        mediapipe
-        hand module. The distance between the tips of two fingers is continuously measured in real-time. This is
-        achieved
-        by calculating the Euclidean distance between the respective landmark points. The measured distance is
-        then
-        mapped
-        to control parameters such as speed, volume, or brightness. A shorter distance corresponds to a lower
-        speed,
-        volume, or brightness, while a longer distance could indicate an increase in these settings. </p>
-      <h4>4. Pipe Communication</h4>
-      <p>We initially used multiprocessing. Pipe to communicate data between the hand tracking module and the menu
-        module
-        for better management of the system. We defined a structure ‘(1, (x, y))’, where the first element ‘1’
-        indicates
-        a
-        click event (0 if no click), and the second element (x, y) denotes the associated coordinates. The hand
-        tracking
-        shares this formatted data through pipe in every frame, providing the menu module with real-time updates
-        for
-        click
-        events and coordinates.</p>
-      <p>The communication pipeline worked perfectly fine on our own laptop, but during testing on the Raspberry
-        Pi
-        platform, a notable conflict happened between the pipe and the cv2 camera capture. The camera failed to
-        capture
-        the frame when the pipe was active. Interestingly, the issue was resolved when the pipe was removed. This
-        unexpected conflict may be related to concurrency or the interplay between multiprocessing operations and
-        camera
-        capture. As a result, we have made a strategic decision to integrate hand tracking and menu into one
-        module to
-        eliminate the need for a communication pipe. </p>
-      <h4>5. Tuning and Performance Testing</h4>
-      <p>To achieve optimal hand-tracking accuracy and performance, we fine-tuned several key parameters in the
-        configuration of the Hand Landmark model. Specifically, we adjusted the following parameters to enhance the
-        overall reliability and efficiency of our system: </p>
-      <ul>
-        <p class="thick">max_num_hands</p>
-        <p>We set the maximum number of hands detected by the model to 1 (previously it was set to 2). By limiting the
-          system to recognize a single hand, we significantly improved computational efficiency and resulted in a
-          notable performance boost of approximately 180%.</p>
-        <table class="side-pics">
-          <tr>
-            <td>
-              <img src="src\image7.png" class="center-pic" width=100%>
-            </td>
-            <td>
-              <img src="src\image4.png" class="center-pic" width=100%>
-            </td>
-          </tr>
-        </table>
-        <h6>Figure 8: Reducing the number of hands being detected</h6>
+      <p class="thick">Choosing Frame Size</p>
+      <p>The choice of the frame size of 640*480 pixels provides a balance between speed and accurate identification
+        in the hand-tracking process. A smaller frame size generally leads to faster processing times due to fewer
+        computational resources, which contributes to a higher frame rate and more efficient hand-tracking operation.
+        However, a too-small frame size may not provide sufficient details for accurate hand tracking. </p>
+    </div>
 
-        <p class="thick">min_detection_confidence</p>
-        <p>This threshold represents the confidence level required for successful palm detection in a model. At a low
-          min_detection_confidence, the system will attempt to detect hands in every frame at a low confidence level
-          associated with the detected hand. This will increase false positives as the system becomes more permissive in
-          accepting detections. If the confidence level is set too high, it can lead to more conservative hand detection
-          and cause the system to miss valid hand instances. To ensure robust hand detection, we set the minimum
-          confidence level to 0.8.
-        </p>
-        <img src="src\image2.png" class="center-pic" width="50%">
-        <h6>Figure 9: Hand Tracking Module False Detecting Background at Low min_detection_confidence</h6>
+    <h3 id="design6">Integrating Menu, Hand Tracking, and Devices</h3>
+    <p>After successfully creating functioning home systems, menus, and hand gestures that ran individually, the
+      next
+      step was to integrate them to run together. To achieve this, we used our laptops to do all of the
+      integration.
+      Our
+      first attempt was to combine menu navigation with hand gestures using the pipe module that linked our two
+      files.
+      The integration was perfect and running smoothly on our laptops. However, we encountered a problem when we
+      tested
+      the same code on the Raspberry Pi. The processor of the Raspberry Pi was much slower, resulting in a delay
+      of
+      3
+      seconds from the time our hand physically moved to the MediaPipe hand outline. Realizing the need for
+      adjustments,
+      we changed our integration method from using the pipe module to using only one file and implemented all
+      the
+      home
+      systems in the same file. We also adjusted the camera FPS to 5, which finally led to the smooth running of
+      our
+      integration without any delays.</p>
 
-        <p class="thick">min_tracking_confidence</p>
-        <p>This threshold represents the bounding box IoU threshold between hands in the current frame and the last
-          frame. If the confidence is set too low, other objects other than the hand could be accepted as a valid
-          tracking result. This can lead to increased sensitivity to noise and may result in the system tracking false
-          positives or inaccurately tracking hand positions. To maintain accurate hand tracking, we tuned the minimum
-          confidence score for tracking to 0.8.</p>
-        <iframe width="420" height="315" src="https://youtube.com/embed/X6E5mHIKcdU?autoplay=1&loop=1">
-        </iframe>
-
-        <p class="thick">Choosing Frame Size</p>
-        <p>The choice of the frame size of 640*480 pixels provides a balance between speed and accurate identification
-          in the hand-tracking process. A smaller frame size generally leads to faster processing times due to fewer
-          computational resources, which contributes to a higher frame rate and more efficient hand-tracking operation.
-          However, a too-small frame size may not provide sufficient details for accurate hand tracking. </p>
-      </ul>
-
-      <h3 id="design6">Integrating Menu, Hand Tracking, and Devices</h3>
-      <p>After successfully creating functioning home systems, menus, and hand gestures that ran individually, the
-        next
-        step was to integrate them to run together. To achieve this, we used our laptops to do all of the
-        integration.
-        Our
-        first attempt was to combine menu navigation with hand gestures using the pipe module that linked our two
-        files.
-        The integration was perfect and running smoothly on our laptops. However, we encountered a problem when we
-        tested
-        the same code on the Raspberry Pi. The processor of the Raspberry Pi was much slower, resulting in a delay
-        of
-        3
-        seconds from the time our hand physically moved to the MediaPipe hand outline. Realizing the need for
-        adjustments,
-        we changed our integration method from using the pipe module to using only one file and implemented all
-        the
-        home
-        systems in the same file. We also adjusted the camera FPS to 5, which finally led to the smooth running of
-        our
-        integration without any delays.</p>
-
-      <h3 id="design7">Loading at Reboot</h3>
-      <p>At this stage of our project, we have consolidated all the code for the menu, hand detection, hand
-        outline,
-        and
-        home system controls into a single file called ‘final.py’. Initially, we tried to run this file at reboot
-        using
-        crontab and a bash script. We made sure that all the paths called in ‘final.py’ were renamed to start from
-        ‘\home\pi’ and that the bash script ran from ‘/tmp’. We even turned on ‘Console Auto-Login’ in the
-        Raspberry
-        Pi
-        configurations to avoid the need for logging in at reboot. However, despite all our efforts, we were
-        unable to
-        run
-        the code on reboot.</p>
-      <p>So, we decided to modify /.bashrc to run the Python file directly at reboot. This method worked, but we
-        faced
-        another issue - we couldn't play sound and run the media player simultaneously. It turned out that the
-        media
-        player had to be run without using sudo, while our current ‘final.py’ required sudo to run. To resolve
-        this,
-        we
-        created another Python script to separate the audio player process and the remainder of the ‘final.py’
-        process.
-        The first process ran without sudo, while the second process ran with sudo. We were able to get the two
-        processes
-        to communicate with each other using a text file. In ‘final.py’, we wrote the instructions, including
-        ‘pause’,
-        ‘play’, ‘next’, ‘prev’, and volume, to the text file. In ‘speaker.py’, it read the last line of the text
-        file
-        and
-        executed the instruction.</p>
-      <p>After making all these changes, we were finally able to successfully start running our home gestured home
-        automation system on reboot. </p>
+    <h3 id="design7">Loading at Reboot</h3>
+    <p>At this stage of our project, we have consolidated all the code for the menu, hand detection, hand
+      outline,
+      and
+      home system controls into a single file called ‘final.py’. Initially, we tried to run this file at reboot
+      using
+      crontab and a bash script. We made sure that all the paths called in ‘final.py’ were renamed to start from
+      ‘\home\pi’ and that the bash script ran from ‘/tmp’. We even turned on ‘Console Auto-Login’ in the
+      Raspberry
+      Pi
+      configurations to avoid the need for logging in at reboot. However, despite all our efforts, we were
+      unable to
+      run
+      the code on reboot.</p>
+    <p>So, we decided to modify /.bashrc to run the Python file directly at reboot. This method worked, but we
+      faced
+      another issue - we couldn't play sound and run the media player simultaneously. It turned out that the
+      media
+      player had to be run without using sudo, while our current ‘final.py’ required sudo to run. To resolve
+      this,
+      we
+      created another Python script to separate the audio player process and the remainder of the ‘final.py’
+      process.
+      The first process ran without sudo, while the second process ran with sudo. We were able to get the two
+      processes
+      to communicate with each other using a text file. In ‘final.py’, we wrote the instructions, including
+      ‘pause’,
+      ‘play’, ‘next’, ‘prev’, and volume, to the text file. In ‘speaker.py’, it read the last line of the text
+      file
+      and
+      executed the instruction.</p>
+    <p>After making all these changes, we were finally able to successfully start running our home gestured home
+      automation system on reboot. </p>
   </section>
 
   <section id="results">
@@ -588,13 +586,13 @@
 
   <section id="contributions">
     <h2>Contributions</h2>
-    <table>
-      <tr width=90%>
-        <td width="45%">
-          <img src="src\portrait2.jpg" class="center-pic" width=60%>
+    <table class="table2">
+      <tr>
+        <td>
+          <img src="img/portrait2.jpg" class="center-pic-60" alt="Vanessa Fang">
         </td>
-        <td width="45%">
-          <img src="src\portrait1.jpg" class="center-pic" width=60%>
+        <td>
+          <img src="img/portrait1.jpg" class="center-pic-60" alt="Xiaoyu Liang">
         </td>
       </tr>
       <tr>
@@ -608,14 +606,14 @@
         </td>
       </tr>
     </table>
-    <table>
-      <tr width=90%>
-        <td width=45%>
+    <table class="table2">
+      <tr>
+        <td>
           <p>Vanessa was responsible for designing and implementing the menu, ensuring its functionality and ease of
             navigation. Additionally, she created the website for the project report and integrated the hardware into
             the menu.</p>
         </td>
-        <td width=45%>
+        <td>
           <p>Xiaoyu was responsible for developing the hand gestures using OpenCV and MediaPipe, ensuring it was stable
             and accurate. She also integrated the menu and hand detection and was in charge of filming and editing the
             demo video.</p>
@@ -636,58 +634,38 @@
 
   <section id="ref">
     <h2>References</h2>
-    <table>
-      <tr>
-        <td>
-          <h3>Installations</h3>
-          <ul>
-            <li><a href="https://pypi.org/project/mediapipe-rpi4/">mediapipe-rpi4 · PyPI </a></li>
-            <li><a
-                href="https://canvas.cornell.edu/courses/55811/pages/opencv-install-install-of-pre-compiled-library-fast-copy-3?module_item_id=2284558">OpenCV
-                Install</a></li>
-            <li><a
-                href="https://downloads.raspberrypi.org/raspios_armhf/images/raspios_armhf-2021-05-28/">raspios_armhf-2021-05-28
-              </a></li>
-          </ul>
-        </td>
-        <td>
-          <h3>Software</h3>
-          <ul>
-            <li><a href="https://core-electronics.com.au/guides/hand-identification-raspberry-pi/">Hand Recognition |
-                OpenCV</a></li>
-            <li><a href="https://developers.google.com/mediapipe/solutions/vision/hand_landmarker">Hand Landmarks |
-                MediaPipe</a></li>
-            <li><a href="https://docs.python.org/3/library/multiprocessing.html">Multiprocessing</a></li>
-          </ul>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <h3>Hardware</h3>
-          <ul>
-            <li><a href="https://projects.raspberrypi.org/en/projects/getting-started-with-picamera">Camera Module</a>
-            </li>
-          </ul>
-        </td>
-        <td>
-          <h3>Student Project</h3>
-          <li><a
-              href="https://courses.ece.cornell.edu/ece5990/ECE5725_Spring2020_Projects/May_15_Demo/Air%20Painter/awt46_sc2524_Thursday-3/awt46_sc2524_Thursday/index.html">Air
-              Painter</a></li>
-        </td>
-      </tr>
-    </table>
 
+    <h3>Installations</h3>
+    <ul>
+      <li><a href="https://pypi.org/project/mediapipe-rpi4/">mediapipe-rpi4 · PyPI </a></li>
+      <li><a
+          href="https://canvas.cornell.edu/courses/55811/pages/opencv-install-install-of-pre-compiled-library-fast-copy-3?module_item_id=2284558">OpenCV
+          Install</a></li>
+      <li><a
+          href="https://downloads.raspberrypi.org/raspios_armhf/images/raspios_armhf-2021-05-28/">raspios_armhf-2021-05-28
+        </a></li>
+    </ul>
 
+    <h3>Software</h3>
+    <ul>
+      <li><a href="https://core-electronics.com.au/guides/hand-identification-raspberry-pi/">Hand Recognition |
+          OpenCV</a></li>
+      <li><a href="https://developers.google.com/mediapipe/solutions/vision/hand_landmarker">Hand Landmarks |
+          MediaPipe</a></li>
+      <li><a href="https://docs.python.org/3/library/multiprocessing.html">Multiprocessing</a></li>
+    </ul>
+    <h3>Hardware</h3>
+    <ul>
+      <li><a href="https://projects.raspberrypi.org/en/projects/getting-started-with-picamera">Camera Module</a>
+      </li>
+    </ul>
+    <h3>Student Project</h3>
+    <ul>
+      <li><a
+          href="https://courses.ece.cornell.edu/ece5990/ECE5725_Spring2020_Projects/May_15_Demo/Air%20Painter/awt46_sc2524_Thursday-3/awt46_sc2524_Thursday/index.html">Air
+          Painter</a></li>
+    </ul>
   </section>
-
-
-
-
-
-  <div margin-bottom="150px">
-    <p> :] </p>
-  </div>
 
   <script>
     // JavaScript to toggle the dropdown content

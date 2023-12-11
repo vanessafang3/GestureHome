@@ -63,6 +63,16 @@ nav li {
   position: relative;
 }
 
+nav li b {
+  font-size: larger;
+  padding-top: 30px;
+  padding-bottom: 20px;
+  display: block;
+  color: white;
+  text-decoration: none;
+  text-align: center;
+}
+
 nav li a,
 nav h1 {
   display: block;
@@ -102,10 +112,30 @@ nav a:hover {
   color: white;
 }
 
-.center-pic {
+img {
   display: block;
   margin-left: auto;
   margin-right: auto;
+}
+
+.center-pic-60 {
+  width: 60%;
+}
+
+.center-pic-70 {
+  width: 70%;
+}
+
+.center-pic-50 {
+  width: 50%;
+}
+
+.center-pic-100 {
+  width: 100%;
+}
+
+.center-pic-80 {
+  width: 80%;
 }
 
 h6 {
@@ -138,4 +168,30 @@ iframe {
   margin-left: auto;
   margin-right: auto;
   display: block;
+  width: 420px;
+  height: 315px;
+}
+
+.tune {
+  padding-left: 25px;
+}
+
+.table1 {
+  width: 60%;
+}
+
+.table1 td {
+  width: 30%;
+}
+
+.table2 tr {
+  width: 90%;
+}
+
+.table td {
+  width: 45%;
+}
+
+.ref li {
+  font-family: Arial, Helvetica, sans-serif;
 }
