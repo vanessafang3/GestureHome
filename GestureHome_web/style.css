@@ -192,6 +192,11 @@ iframe {
   width: 45%;
 }
 
+.center-pic-2 {
+  max-width: 250px;
+  width: 100%;
+}
+
 .ref li {
   font-family: Arial, Helvetica, sans-serif;
 }
